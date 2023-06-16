@@ -22,7 +22,7 @@ public interface IApplicationDbContext
 
     DbSet<JobItemGroup> JobItemGroups { get; }
 
-    DbSet<Attachment> Attachments { get; }
+    DbSet<Job> Attachments { get; }
 
     DbSet<UserInfo> UserInfos { get; }
 

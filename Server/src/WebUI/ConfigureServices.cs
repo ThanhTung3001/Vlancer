@@ -1,25 +1,26 @@
-﻿using TSoft.TaskManagement.Application.Common.Interfaces;
+﻿using System.Text;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using NSwag;
+using NSwag.Generation.Processors.Security;
+using TSoft.TaskManagement.Application.Common.Interfaces;
 using TSoft.TaskManagement.Infrastructure.Persistence;
 using TSoft.TaskManagement.WebUI.Filters;
 using TSoft.TaskManagement.WebUI.Services;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Mvc;
-using NSwag;
-using NSwag.Generation.Processors.Security;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using WebUI.Services;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace WebUI;
 
 public static class ConfigureServices
 {
-    [Obsolete]
-    public static IServiceCollection AddWebUIServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddWebUiServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDatabaseDeveloperPageExceptionFilter();
 
         services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddScoped<IMailSenderService, MailSenderService>();
 
         services.AddHttpContextAccessor();
 
@@ -51,7 +52,6 @@ public static class ConfigureServices
             configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
         });
         var issuer = configuration["Jwt:Issuer"];
-        Console.Write(issuer);
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
          .AddJwtBearer(options =>
          {

@@ -1,6 +1,5 @@
 namespace TSoft.TaskManagement.Domain.Entities.User;
 
-
 public class UserInfo : BaseAuditableEntity
 {
     public Guid AppUserId { get; set; }

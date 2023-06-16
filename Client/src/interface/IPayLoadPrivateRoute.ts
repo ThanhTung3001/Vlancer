@@ -1,4 +1,7 @@
-export interface IPayloadPrivateRoute{
-    Components:React.FC<any>;
+export interface IPayLoadPrivateRoute {
+    Components: React.FC<any>;
     requiredRoles: string[];
+    auth: boolean,
+    roleCheck: string,
+    path: string
 }

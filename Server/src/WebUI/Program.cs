@@ -1,11 +1,13 @@
+using TSoft.TaskManagement.Infrastructure;
 using TSoft.TaskManagement.Infrastructure.Persistence;
+using WebUI;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddWebUIServices(builder.Configuration);
+builder.Services.AddWebUiServices(builder.Configuration);
 
 var app = builder.Build();
 
@@ -16,12 +18,10 @@ if (app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
 
     // Initialise and seed database
-    using (var scope = app.Services.CreateScope())
-    {
-        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
-        await initialiser.InitialiseAsync();
-        await initialiser.SeedAsync();
-    }
+    using var scope = app.Services.CreateScope();
+    var initialize = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialiser>();
+    await initialize.InitialiseAsync();
+    await initialize.SeedAsync();
 }
 else
 {

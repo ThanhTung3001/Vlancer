@@ -1,18 +1,16 @@
-﻿using TSoft.TaskManagement.Application.Common.Interfaces;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using TSoft.TaskManagement.Application.Common.Interfaces;
 using TSoft.TaskManagement.Infrastructure.Files;
 using TSoft.TaskManagement.Infrastructure.Identity;
 using TSoft.TaskManagement.Infrastructure.Persistence;
 using TSoft.TaskManagement.Infrastructure.Persistence.Interceptors;
 using TSoft.TaskManagement.Infrastructure.Services;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
-namespace Microsoft.Extensions.DependencyInjection;
+namespace TSoft.TaskManagement.Infrastructure;
 
 public static class ConfigureServices
 {

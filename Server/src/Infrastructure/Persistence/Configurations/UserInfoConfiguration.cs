@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TSoft.TaskManagement.Domain.Entities.User;
 
-namespace TSoft.TaskManagement.Infrastructure.Persistence
+namespace TSoft.TaskManagement.Infrastructure.Persistence.Configurations
 {
     public class UserInfoConfiguration : IEntityTypeConfiguration<UserInfo>
     {

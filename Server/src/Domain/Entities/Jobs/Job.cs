@@ -15,5 +15,5 @@ public class Job : BaseAuditableEntity
     public JobCategory? JobCategory { get; set; }
     public List<UserSkill> UserSkills = new List<UserSkill>();
     public PriorityLevel PriorityLevel { get; set; }
-    public List<Attachment> Attachments = new List<Attachment>();
+    public List<FileUpload> Attachments = new List<FileUpload>();
 }

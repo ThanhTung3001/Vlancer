@@ -1,5 +1,6 @@
 ﻿using TSoft.TaskManagement.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Controllers;
 
 namespace TSoft.TaskManagement.WebUI.Controllers;
 

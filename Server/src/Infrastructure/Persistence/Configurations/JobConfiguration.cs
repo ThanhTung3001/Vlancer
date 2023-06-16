@@ -9,7 +9,7 @@ public class JobConfiguration : IEntityTypeConfiguration<Job>
 {
     public void Configure(EntityTypeBuilder<Job> builder)
     {
-        builder.HasMany<Attachment>(atm => atm.Attachments)
+        builder.HasMany<FileUpload>(atm => atm.Attachments)
             .WithOne(e => e.Job)
             .HasForeignKey(e => e.JobId);
         builder.HasMany<JobItemGroup>(e => e.JobItemGroups)

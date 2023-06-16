@@ -300,7 +300,7 @@ namespace WebUI.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TSoft.TaskManagement.Domain.Entities.Attachments.Attachment", b =>
+            modelBuilder.Entity("TSoft.TaskManagement.Domain.Entities.Attachments.FileUpload", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -334,15 +334,11 @@ namespace WebUI.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RootOrigin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("JobId");
 
-                    b.ToTable("Attachments");
+                    b.ToTable("FileUpload");
                 });
 
             modelBuilder.Entity("TSoft.TaskManagement.Domain.Entities.Jobs.Job", b =>
@@ -388,7 +384,7 @@ namespace WebUI.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Jobs");
+                    b.ToTable("Job");
                 });
 
             modelBuilder.Entity("TSoft.TaskManagement.Domain.Entities.Jobs.JobCategory", b =>
@@ -569,6 +565,9 @@ namespace WebUI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
@@ -589,6 +588,8 @@ namespace WebUI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("JobGroupId");
 
@@ -652,8 +653,20 @@ namespace WebUI.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -662,6 +675,10 @@ namespace WebUI.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -685,6 +702,9 @@ namespace WebUI.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -760,7 +780,7 @@ namespace WebUI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TSoft.TaskManagement.Domain.Entities.Attachments.Attachment", b =>
+            modelBuilder.Entity("TSoft.TaskManagement.Domain.Entities.Attachments.FileUpload", b =>
                 {
                     b.HasOne("TSoft.TaskManagement.Domain.Entities.Jobs.Job", "Job")
                         .WithMany("Attachments")
@@ -846,6 +866,10 @@ namespace WebUI.Migrations
 
             modelBuilder.Entity("TSoft.TaskManagement.Domain.Entities.User.Skill", b =>
                 {
+                    b.HasOne("TSoft.TaskManagement.Infrastructure.Identity.ApplicationUser", null)
+                        .WithMany("UserSkills")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("TSoft.TaskManagement.Domain.Entities.Jobs.JobGroup", "JobGroup")
                         .WithMany()
                         .HasForeignKey("JobGroupId")
@@ -904,6 +928,11 @@ namespace WebUI.Migrations
                 });
 
             modelBuilder.Entity("TSoft.TaskManagement.Domain.Entities.User.UserInfo", b =>
+                {
+                    b.Navigation("UserSkills");
+                });
+
+            modelBuilder.Entity("TSoft.TaskManagement.Infrastructure.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("UserSkills");
                 });

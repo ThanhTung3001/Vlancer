@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TSoft.TaskManagement.Domain.Entities;
 using TSoft.TaskManagement.Domain.Entities.Jobs;
 
 namespace TSoft.TaskManagement.Infrastructure.Persistence.Configurations;

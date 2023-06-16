@@ -41,7 +41,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
 
     public DbSet<JobItemGroup> JobItemGroups => Set<JobItemGroup>();
 
-    public DbSet<Attachment> Attachments => Set<Attachment>();
+    public DbSet<Job> Attachments => Set<Job>();
 
     public DbSet<Skill> Skills => Set<Skill>();
 
